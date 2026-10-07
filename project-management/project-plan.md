@@ -2,7 +2,7 @@
 
 ## Goal
 
-Create a documented, repeatable process for loading sequencing quality-control data from NovaSeq X Plus, BCL-Convert, and TapeStation exports into PostgreSQL for cross-run and sample-level analysis.
+Support the Hartwell Center's production NGS run planner, which uses historical sequencing outcomes to recommend adjusted sample loading amounts that help samples reach their desired read counts in the first run. This repository provides the documented, repeatable process for importing the planner's sequencing quality-control inputs into PostgreSQL.
 
 ## Tools
 
@@ -10,6 +10,7 @@ Create a documented, repeatable process for loading sequencing quality-control d
 - pandas for Excel ingestion
 - psycopg for PostgreSQL connections and bulk upserts
 - PostgreSQL
+- R Shiny frontend deployed on the Hartwell Center's R Shiny server
 - Illumina NovaSeq X Plus, BCL-Convert, and TapeStation export files
 
 ## First Tasks
@@ -22,12 +23,12 @@ Create a documented, repeatable process for loading sequencing quality-control d
 ## Milestones
 
 - **Day 1:** Confirm the source formats, destination schema, credentials process, and data-access boundaries.
-- **Day 2:** Run and validate the three historical import paths against a non-production database.
-- **Day 3:** Document validated commands, reconciliation results, limitations, and production handoff requirements.
+- **Day 2:** Run and validate the three historical import paths against a non-production database, then verify that the loaded metrics are available to the planner's database backend.
+- **Day 3:** Document validated commands, reconciliation results, limitations, and the production handoff for the deployed R Shiny planner.
 
 ## Definition of Done
 
-The project is complete when each approved input type can be imported into a non-production database, source-to-destination row counts have been reviewed, and another team member can reproduce the process using the README and import guide without access to private source data.
+The project is complete when each approved input type can be imported into a non-production database, source-to-destination row counts have been reviewed, and another team member can reproduce the data-ingestion process using the README and import guide without access to private source data. The deployed R Shiny planner should use the resulting historical data to provide loading recommendations for production operations.
 
 Next steps include command-line configuration, database migrations, de-identified parser fixtures, automated tests, and operational monitoring.
 

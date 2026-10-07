@@ -1,17 +1,22 @@
-# Sequencing Metrics Import Tools
+# NGS Run Planner and Sequencing Metrics Import Tools
 
-Utilities for importing sequencing run, demultiplexing, quality, and TapeStation metrics into PostgreSQL. The tools support historical data loads for the KIDS26 Team 4 project; they do not collect data or include sequencing output in this repository.
+The Hartwell Center's production NGS run planner uses historical sequencing outcomes to recommend adjusted sample loading amounts that help each sample reach its target read count in the first sequencing run. The application uses a PostgreSQL backend and an R Shiny frontend deployed on the Hartwell Center's R Shiny server.
+
+This repository documents the ParseTools ingestion utilities that import the run, demultiplexing, quality, and TapeStation metrics supporting that historical database. It does not include sequencing output, source data, or the deployed R Shiny application.
 
 ## Project Profile
 
-- **Problem:** Sequencing quality-control metrics are distributed across instrument exports and are difficult to query together.
-- **Goal:** Load standard Illumina and TapeStation outputs into PostgreSQL tables that support consistent run- and sample-level analysis.
-- **Inputs:** NovaSeq X Plus run-metrics workbook, BCL-Convert report CSVs, and TapeStation XML exports.
-- **Output:** Upserted PostgreSQL records with source-file provenance.
-- **Stack:** Python 3, pandas, psycopg, and PostgreSQL.
+- **Problem:** Sequencing quality-control metrics are distributed across instrument exports, making it difficult to use prior run outcomes when planning sample loading.
+- **Goal:** Support an NGS run planner that predicts adjusted sample loading amounts needed to reach each sample's desired read count in its first sequencing run.
+- **Inputs:** Historical NovaSeq X Plus run-metrics workbooks, BCL-Convert report CSVs, and TapeStation XML exports.
+- **Output:** PostgreSQL records with source-file provenance that support the planner's historical analysis and loading recommendations.
+- **Stack:** Python 3, pandas, psycopg, PostgreSQL, and R Shiny.
+- **Deployment:** The NGS run planner is live on the Hartwell Center's R Shiny server and is in production use.
 - **Data handling:** Do not commit source data, database credentials, or clinical/identifiable information.
 
-## Import Utilities
+## Application and Import Utilities
+
+The run planner queries the PostgreSQL database to incorporate previous sequencing performance into its loading recommendations. The R Shiny frontend provides the operational interface; the ParseTools below load the historical metrics that underpin the planner. The R Shiny application is deployed separately and is not included in this repository.
 
 | Script | Input | Destination tables | Notes |
 | --- | --- | --- | --- |
@@ -85,4 +90,4 @@ requirements.txt             Python dependencies
 
 ## Limitations and Next Steps
 
-The current scripts require source paths to be configured in code and assume the listed destination tables already exist. Future work should add command-line path options, schema migrations, automated parser tests with de-identified fixtures, and structured import logging.
+The current scripts require source paths to be configured in code and assume the listed destination tables already exist. Future work should add command-line path options, schema migrations, automated parser tests with de-identified fixtures, structured import logging, and ongoing evaluation of planner recommendations against observed sequencing outcomes.
