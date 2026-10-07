@@ -1,18 +1,17 @@
 # Team and Roles
 
-- **Team name:** [Add name]
-- **Team lead:** [Name and GitHub handle]
-- **Communication channel:** [Add link]
-- **Project question/problem:** [Add one sentence]
-- **Expected output:** [Add one sentence]
-- **Tools and stack:** [Languages, libraries, notebooks, APIs, databases, services]
+- **Team name:** KIDS26 Team 4
+- **Project focus:** Import sequencing quality-control metrics into PostgreSQL.
+- **Expected output:** Reproducible, documented imports for NovaSeq X Plus, BCL-Convert, and TapeStation exports.
+- **Tools and stack:** Python, pandas, psycopg, PostgreSQL.
 
-## Roles
+## Suggested Roles
 
 | Person | Role | Main responsibility | Backup or support needed |
 | --- | --- | --- | --- |
-| [Name] | [Role] | [Responsibility] | [Support] |
-| [Name] | [Role] | [Responsibility] | [Support] |
-| [Name] | [Role] | [Responsibility] | [Support] |
+| Unassigned | Database owner | Provision destination tables, constraints, and non-production access. | Schema review |
+| Unassigned | Data steward | Confirm approved source locations, formats, and provenance. | Data-governance guidance |
+| Unassigned | Pipeline developer | Configure, run, and validate importer scripts. | Python/PostgreSQL support |
+| Unassigned | Documentation owner | Record validation evidence, limitations, and handoff steps. | Reviewer |
 
-Roles can overlap. Revisit them when the project direction or stack changes.
+Assign names and communication details during the first project check-in. Do not store private contact information, credentials, or restricted-data locations in this file.
